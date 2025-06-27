@@ -9,28 +9,19 @@ graph TD
     G --> I[Audit History]
     G --> J[Logout]
     
-    style B fill:#10B981,color:#fff
-    style A fill:#10B981,color:#fff
-    style C fill:#10B981,color:#fff
-    style D fill:#10B981,color:#fff
-    style E fill:#10B981,color:#fff
-    style E fill:#10B981,color:#fff
-```
-
-```mermaid
-graph TD
-    %% Main diagram content
-    A[Start] --> B[Process]
-    B --> C[End]
+    %% Define reusable style class
+    classDef primaryNode fill:#10B981,color:#fff
+    class A,B,C,D,E primaryNode
     
-    %% Legend using text nodes
+    %% Legend
     subgraph Legend
-        L1[Legend Item 1]
-        L2[Legend Item 2]
-        L3[Legend Item 3]
+        LP[Pages]
+        LC[Components/Links]
     end
     
     %% Style legend items
-    classDef legendStyle fill:#f9f9f9,stroke:#333,stroke-width:1px
-    class L1,L2,L3 legendStyle
+    classDef pageStyle fill:#10B981,color:#fff
+    classDef componentStyle stroke-width:1px
+    class LP pageStyle
+    class LC componentStyle
 ```
