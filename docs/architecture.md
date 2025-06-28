@@ -75,6 +75,7 @@ graph TD
 | due\_date                 | DATE                                  | Nullable           |
 | modified\_by              | BIGINT                                | FK → users(id)     |
 | created\_at / updated\_at | TIMESTAMP                             | Auto               |
+| completed_at              | TIMESTAMP                             | Nullable           |
 | **system\_time**          | PERIOD FOR SYSTEM\_TIME               | Managed by MariaDB |
 
 > Table defined as `WITH SYSTEM VERSIONING` & partitioned by month for pruning.
