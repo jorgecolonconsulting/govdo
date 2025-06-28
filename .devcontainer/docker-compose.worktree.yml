@@ -17,6 +17,7 @@ services:
       - XDEBUG_START_WITH_REQUEST=trigger
       - XDEBUG_TRIGGER_VALUE=PHPSTORM
       - php.xdebug.log=/var/www/html/storage/logs/xdebug.log
+      - VHOST_NAME="${VHOST_NAME:-worktree}"
     networks:
       - custom_network
   redis:
