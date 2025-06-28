@@ -9,13 +9,13 @@
 - **G4** Deliver an MVP within **1 business week**, leaving optional AI‑powered suggestions as a stretch goal.
 
 ### Background Context
-GovDo is a thin, mobile‑first web module that will be embedded into a larger AI‑powered municipal portal.  The module demonstrates the team’s Laravel + React capability while solving a real need: tracking resident‑facing communication tasks (alerts, notices, outreach campaigns, etc.).  Government staff often juggle dozens of such items without a lightweight tool—GovDo fills that gap.
+GovDo is a **mobile‑first web application**.  The application demonstrates the team’s Laravel + React capability while solving a real need: tracking resident‑facing communication tasks (alerts, notices, outreach campaigns, etc.).  Government staff often juggle dozens of such items without a lightweight tool—GovDo fills that gap.
 
 ### Change Log
 | Date | Version | Description | Author |
 |------|---------|-------------|--------|
-| 2025‑06‑27 | 1.0 | Initial draft | PM |
-| 2025‑06‑27 | 1.1 | Removed FR8, clarified NFR3, updated tech stack to Heroku + Laravel 11 | PO |
+| 2025‑06‑24 | 1.0 | Initial draft | PM |
+| 2025‑06‑26 | 1.1 | Removed FR8, clarified NFR3, updated tech stack to Heroku + Laravel 11 | PO |
 
 ---
 
@@ -30,8 +30,6 @@ GovDo is a thin, mobile‑first web module that will be embedded into a larger A
 - **FR6** The list sorts with **new or recently changed tasks at the top** (no scroll‑position preservation needed).
 - **FR7** The API exposes **`GET /tasks/history`** returning a paginated audit trail of all task changes.
 
-> *FR8 (AI generated suggestions) deferred to Phase 2.*
-
 ### Non‑Functional (NFR)
 - **NFR1** Runs on **Heroku** Hobby dyno; boot ≤ 750 ms cold start.
 - **NFR2** Uses **MariaDB 10.11 (JawsDB add‑on)** with system‑versioned tables; observer user has *no* SELECT privileges.
@@ -42,10 +40,72 @@ GovDo is a thin, mobile‑first web module that will be embedded into a larger A
 ---
 
 ## User Interface Design Goals
-1. **Mobile First**  – Max‑width container `max‑w‑md` keeps content readable; sticky header with app title and filter chips.
-2. **Zero‑Clutter Interaction**  – FAB‑style “+ New Task” button; swipe‑left row actions on touch.
-3. **Government Branding**  – follows portal’s colour tokens (primary Indigo 600, accent Emerald 500, danger Red 600).
-4. **Accessibility**  – WCAG 2.1 AA contrast; focus rings (`focus-visible:outline-primary`).
+1. **Mobile Web First**  – Only uses single columns; sticky header with app title and filter chips. It uses well-known accepted UX patterns that are appropriate for mobile web.
+2. **Zero‑Clutter Interaction**  – FAB‑style “+ New Task” button; Bottom Sheet for task filters.
+3. **Government Branding**  – follows portal’s color tokens under the section `Color Guidelines`. And Averia Serif Libre Google Font for headings and Inter for everything else.
+4. **Accessibility**  – WCAG 2.1 AA contrast; focus rings
+
+## Color Use Guidelines 
+
+### Main brand colors
+
+#### Primary Color
+
+#0087bd <span style="display:inline-block;width:10px; height:10px; background-color:#0087bd;"></span>
+
+#### Secondary Color
+
+#8071b7 <span style="display:inline-block;width:10px; height:10px; background-color:#8071b7;"></span>
+
+### Palette
+
+#### Blue Palette
+
+#40a5ce <span style="display:inline-block;width:10px; height:10px; background-color:#40a5ce;"></span>
+
+#0087bd <span style="display:inline-block;width:10px; height:10px; background-color:#0087bd;"></span>
+
+#0073a0 <span style="display:inline-block;width:10px; height:10px; background-color:#0073a0;"></span>
+
+#### Orange Palette
+
+#f29e6a <span style="display:inline-block;width:10px; height:10px; background-color:#f29e6a;"></span>
+
+#ee7e38 <span style="display:inline-block;width:10px; height:10px; background-color:#ee7e38;"></span>
+
+#ca6b30 <span style="display:inline-block;width:10px; height:10px; background-color:#ca6b30;"></span>
+
+#### Purple Palette
+
+#a094c9 <span style="display:inline-block;width:10px; height:10px; background-color:#a094c9;"></span>
+
+#8071b7 <span style="display:inline-block;width:10px; height:10px; background-color:#8071b7;"></span>
+
+#6d609c <span style="display:inline-block;width:10px; height:10px; background-color:#6d609c;"></span>
+
+#### Pink Palette
+
+#e37b92 <span style="display:inline-block;width:10px; height:10px; background-color:#e37b92;"></span>
+
+#d94f6d <span style="display:inline-block;width:10px; height:10px; background-color:#d94f6d;"></span>
+
+#b8455d <span style="display:inline-block;width:10px; height:10px; background-color:#b8455d;"></span>
+
+#### Neutral Colors
+
+#1f1f29 <span style="display:inline-block;width:10px; height:10px; background-color:#1f1f29;"></span>
+
+#f5f5f3 <span style="display:inline-block;width:10px; height:10px; background-color:#f5f5f3;"></span>
+
+#faffff <span style="display:inline-block;width:10px; height:10px; background-color:#faffff;"></span>
+
+
+### Color Instructions to follow closely
+
+* Prefer (#0087bd <span style="display:inline-block;width:10px; height:10px; background-color:#0087bd;"></span>) for Headings
+* Use (#1f1f29 <span style="display:inline-block;width:10px; height:10px; background-color:#1f1f29;"></span>) for body text if the background is light
+
+---
 
 ## Technical Assumptions
 - **Monorepo:** Turborepo
@@ -62,7 +122,7 @@ monorepo/
 - **Frontend:** Inertia.js with React 19, Tailwind v3, Heroicons.
 - **Database:** MariaDB 10.11 (JawsDB) with system‑versioned `tasks` table.
 - **Auth:** Session cookies (secure, httpOnly, SameSite=Lax).
-- **Docker:** Local dev via `docker-compose` (PHP‑FPM, Nginx, mariadb, mailpit).
+- **Docker:** Local dev via `docker-compose` (PHP‑FPM, Apache, mariadb, mailpit).
 - **CI/CD:** GitHub Actions → Heroku container registry; post‑deploy DB migrate & seed.
 
 ## Epics
