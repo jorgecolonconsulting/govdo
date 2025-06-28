@@ -1,11 +1,9 @@
 import { PageProps } from '@/types';
 import { Head, Link } from '@inertiajs/react';
+import { Button } from '@/Components/ui/button';
 
-export default function Welcome({
-    auth,
-    laravelVersion,
-    phpVersion,
-}: PageProps<{ laravelVersion: string; phpVersion: string }>) {
+
+export default function Welcome({ auth }: PageProps) {
     const handleImageError = () => {
         document
             .getElementById('screenshot-container')
@@ -71,6 +69,7 @@ export default function Welcome({
 
                         <main className="mt-6">
                             <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+                                <Button>Test</Button>
                                 <a
                                     href="https://laravel.com/docs"
                                     id="docs-card"
@@ -354,10 +353,6 @@ export default function Welcome({
                                 </div>
                             </div>
                         </main>
-
-                        <footer className="py-16 text-center text-sm text-black dark:text-white/70">
-                            Laravel v{laravelVersion} (PHP v{phpVersion})
-                        </footer>
                     </div>
                 </div>
             </div>

@@ -8,11 +8,9 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'canRegister' => Route::has('register')
     ]);
-});
+})->middleware(['throttle:60,1']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

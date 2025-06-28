@@ -7,7 +7,8 @@ services:
     env_file:
       - ../apps/web/.env
     volumes:
-      - ../:/var/www/html
+      - ../apps/web:/var/www/html
+      - ./apps/web/docker/.apache-vhost-govdo.conf:/opt/docker/etc/httpd/vhost.common.d/govdo.conf
     ports:
       - "${APP_PORT:-80}:80"
       - "${APP_PORT_SSL:-443}:443"

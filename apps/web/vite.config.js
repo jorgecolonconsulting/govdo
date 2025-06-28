@@ -11,4 +11,8 @@ export default defineConfig({
         }),
         react(),
     ],
+    server: {
+        allowedHosts: ['local.govdo.com'],
+        host: 'local.govdo.com'
+    }
 });
