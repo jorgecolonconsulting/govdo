@@ -179,8 +179,7 @@ monorepo/
 
 - **Validation:** Form‑request classes throw 422 JSON with error bag.
 - **Auth failures:** 401 (unauthenticated) / 403 (forbidden) via Laravel middleware.
-- **Conflict:** *Custom 409 optimistic‑lock* **deferred to future phase.**
-- **Logging:** Monolog to stdout → Heroku logplex; include `X‑Request‑ID`.
+- **Logging:** Laravel Log with Monolog provider to stdout → Heroku papertrail; include `X‑Request‑ID`.
 
 ---
 
@@ -196,8 +195,8 @@ monorepo/
 
 ## Infrastructure & Deployment
 
-- **Heroku**: 1 × Standard‑1 dyno, 1 × JawsDB MariaDB, 1 × Heroku Redis.
-- Docker buildpacks → container registry; release phase runs `php artisan migrate --force`.
+- **Heroku**: 1 × Standard‑1 dyno, 1 × JawsDB MariaDB, 1 × Heroku Redis, 1 x Mailgun, 1 x Papertrail
+- Heroku with `heroku/php` and `heroku/nodejs` buildpacks; release phase runs `php artisan migrate --force`; 
 - Environment vars: `APP_KEY`, `DB_*`, `REDIS_URL`, `REDIS_TLS_VERIFY`, `SESSION_SECURE_COOKIE=true`.
 - HSTS header set via TrustProxies middleware (`max‑age=31536000; preload`).
 

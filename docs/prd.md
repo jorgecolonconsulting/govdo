@@ -134,7 +134,7 @@ monorepo/
 ### Epic 1 Details
 
 #### Story 1.1 Project Scaffolding & CI
-*Init Turborepo, create Laravel 11 app, add Tailwind & Inertia boilerplate, configure Heroku pipeline.*
+*Init Turborepo, create Laravel 11 app, add Tailwind & Inertia boilerplate with React & SSR, add shadcn, configure Heroku pipeline.*
 
 #### Story 1.2 DB Schema & Versioning
 *Create `tasks` table with system‑versioning & `modified_by` column; seed demo data.*
