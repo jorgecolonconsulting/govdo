@@ -36,12 +36,31 @@ echo "📋 Copying .env file..."
 if [ -f "$PROJECT_ROOT/apps/web/.env" ]; then
     cp "$PROJECT_ROOT/apps/web/.env" "$WORKTREE_DIR/apps/web/.env"
     echo "✅ .env file copied successfully"
+    
+    echo "🔧 Updating APP_URL for worktree..."
+    sed -i '' "s|APP_URL=.*|APP_URL=http://local.$WORKTREE_NAME.govdo.com|" "$WORKTREE_DIR/apps/web/.env"
+    echo "✅ APP_URL updated to http://local.$WORKTREE_NAME.govdo.com"
+    
+    echo "🏷️ Adding VHOST_NAME to .env..."
+    echo "VHOST_NAME=$WORKTREE_NAME" >> "$WORKTREE_DIR/apps/web/.env"
+    echo "✅ VHOST_NAME=$WORKTREE_NAME added to .env"
 else
     echo "⚠️  Warning: .env file not found at $PROJECT_ROOT/apps/web/.env"
 fi
 
 echo "📁 Changing to worktree directory..."
 cd "$WORKTREE_DIR"
+
+echo "🌐 Adding hosts entry for local.$WORKTREE_NAME.govdo.com..."
+HOSTS_ENTRY="127.0.0.1 local.$WORKTREE_NAME.govdo.com"
+if ! grep -q "local.$WORKTREE_NAME.govdo.com" /etc/hosts; then
+    echo "Adding: $HOSTS_ENTRY"
+    echo "This requires sudo access to modify /etc/hosts..."
+    echo "$HOSTS_ENTRY" | sudo tee -a /etc/hosts > /dev/null
+    echo "✅ Hosts entry added successfully"
+else
+    echo "✅ Hosts entry already exists"
+fi
 
 echo "📦 Installing npm dependencies..."
 cd apps/web
@@ -69,7 +88,7 @@ echo "📍 Worktree location: $WORKTREE_DIR"
 echo "🌐 Development server PID: $DEV_SERVER_PID"
 echo ""
 echo "To stop the development server:"
-echo "  kill $DEV_SERVER_PID"
+echo "  kill -9 $DEV_SERVER_PID"
 echo ""
 echo "To stop Docker containers:"
 echo "  cd $WORKTREE_DIR"
