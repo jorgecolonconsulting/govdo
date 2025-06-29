@@ -2,7 +2,7 @@
 
 set -e
 
-WORKTREE_NAME="$1"
+WORKTREE_NAME="worktree-$1"
 
 if [ -z "$WORKTREE_NAME" ]; then
     echo "Usage: $0 <worktree-name>"
