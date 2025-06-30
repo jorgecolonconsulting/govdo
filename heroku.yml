@@ -1,0 +1,20 @@
+setup:
+  addons:
+    - plan: jawsdb:kitefin
+      as: DATABASE
+    - plan: cachetogo:test
+      as: REDIS
+    - plan: mailgun:starter
+      as: MAILGUN
+    - plan: papertrail:choklad
+      as: PAPERTRAIL
+  config:
+    NODE_ENV: production
+    NPM_CONFIG_PRODUCTION: false
+build:
+  languages:
+    - nodejs
+    - php
+release:
+  command:
+    - cd apps/web && php artisan migrate --force

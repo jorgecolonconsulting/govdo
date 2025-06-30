@@ -36,3 +36,33 @@ docker-compose.override.yml
 
 # Claude
 .claude/settings.local.json
+CLAUDE.local.md
+
+# Repo management
+.turbo
+packages/ui/dist/ApplicationLogo.js
+packages/ui/dist/ApplicationLogo.mjs
+packages/ui/dist/button.js
+packages/ui/dist/button.mjs
+packages/ui/dist/Checkbox.js
+packages/ui/dist/Checkbox.mjs
+packages/ui/dist/DangerButton.js
+packages/ui/dist/DangerButton.mjs
+packages/ui/dist/Dropdown.js
+packages/ui/dist/Dropdown.mjs
+packages/ui/dist/InputError.js
+packages/ui/dist/InputError.mjs
+packages/ui/dist/InputLabel.js
+packages/ui/dist/InputLabel.mjs
+packages/ui/dist/Modal.js
+packages/ui/dist/Modal.mjs
+packages/ui/dist/NavLink.js
+packages/ui/dist/NavLink.mjs
+packages/ui/dist/PrimaryButton.js
+packages/ui/dist/PrimaryButton.mjs
+packages/ui/dist/ResponsiveNavLink.js
+packages/ui/dist/ResponsiveNavLink.mjs
+packages/ui/dist/SecondaryButton.js
+packages/ui/dist/SecondaryButton.mjs
+packages/ui/dist/TextInput.js
+packages/ui/dist/TextInput.mjs
