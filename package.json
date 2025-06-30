@@ -23,7 +23,8 @@
     "worktree:docker-down:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down app",
     "worktree:docker-down:db": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down db",
     "worktree:docker-bash:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app bash",
-    "worktree:docker-exec:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}"
+    "worktree:docker-exec:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}",
+    "worktree:run-dev:app": "cd apps/web && npm run worktree:dev"
   },
   "repository": {
     "type": "git",

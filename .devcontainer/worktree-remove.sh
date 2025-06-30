@@ -64,7 +64,25 @@ cd "$PROJECT_ROOT"
 
 # Remove the worktree directory and associated git metadata
 echo "🌳 Removing git worktree..."
-git worktree remove "$WORKTREE_DIR"
+if git worktree remove "$WORKTREE_DIR"; then
+    echo "✅ Worktree removed successfully."
+else
+
+    echo ""
+    echo "❌ Failed to remove worktree. Would you like to force delete it? (y/N)"
+    read -r FORCE_DELETE
+    if [[ "$FORCE_DELETE" =~ ^[Yy]$ ]]; then
+        if git worktree remove --force "$WORKTREE_DIR"; then
+            echo "✅ Worktree force removed."
+        else
+            echo "❌ Force removal failed. Please check the worktree status manually."
+            exit 1
+        fi
+    else
+        echo "⚠️  Worktree was not removed. Exiting."
+        exit 1
+    fi
+fi
 
 # Attempt to delete the branch
 echo "🌿 Deleting branch '$WORKTREE_AND_BRANCH_NAME'..."
