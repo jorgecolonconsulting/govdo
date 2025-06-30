@@ -1,0 +1,38 @@
+{
+  "name": "govdo",
+  "version": "0.1.0",
+  "description": "Centralized public communications task management for government officials",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "config": {
+    "command": "",
+    "main_docker_compose_file": ".devcontainer/docker-compose.yml",
+    "worktree_docker_compose_file": ".devcontainer/docker-compose.worktree.yml"
+  },
+  "scripts": {
+    "docker-up:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env up --remove-orphans app",
+    "docker-up:db": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env up --remove-orphans db",
+    "docker-down:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env down app",
+    "docker-down:db": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env down db",
+    "docker-bash:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env exec app bash",
+    "docker-exec:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}",
+    "worktree:docker-up:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env up --remove-orphans app",
+    "worktree:docker-up:db": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env up --remove-orphans db",
+    "worktree:docker-down:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down app",
+    "worktree:docker-down:db": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down db",
+    "worktree:docker-bash:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app bash",
+    "worktree:docker-exec:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgecolonconsulting/govdo.git"
+  },
+  "author": "Jorge Colon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorgecolonconsulting/govdo/issues"
+  },
+  "homepage": "https://github.com/jorgecolonconsulting/govdo#readme"
+}

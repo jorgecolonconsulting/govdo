@@ -26,17 +26,9 @@ services:
       - custom_network
 
   db:
-    image: mariadb:10.11
-    ports:
-      - "${DB_PORT:-3306}:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=basicpassword
-    volumes:
-      - govdo_mysqldata:/var/lib/mysql
-    networks:
-      custom_network:
-        aliases:
-          - shared-db
+    extends:
+      file: docker-compose.db.yml
+      service: db
 
   redis:
     image: redis:7.4

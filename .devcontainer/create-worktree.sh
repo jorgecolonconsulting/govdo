@@ -2,19 +2,20 @@
 
 set -e
 
-WORKTREE_NAME="worktree-$1"
+BASE_NAME="$1"
+WORKTREE_AND_BRANCH_NAME="worktree-$BASE_NAME"
 
-if [ -z "$WORKTREE_NAME" ]; then
-    echo "Usage: $0 <worktree-name>"
-    echo "Example: $0 feature-branch"
+if [ -z "$BASE_NAME" ]; then
+    echo "Usage: $0 <base-name>"
+    echo "Example: $0 feature-xyz"
     exit 1
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-WORKTREE_DIR="$(dirname "$PROJECT_ROOT")/worktree/$WORKTREE_NAME"
+WORKTREE_DIR="$(dirname "$PROJECT_ROOT")/worktree/$WORKTREE_AND_BRANCH_NAME"
 
-echo "🌳 Creating worktree: $WORKTREE_NAME"
+echo "🌳 Creating worktree and branch: $WORKTREE_AND_BRANCH_NAME"
 echo "📍 Location: $WORKTREE_DIR"
 echo "🏠 Project root: $PROJECT_ROOT"
 
@@ -27,10 +28,11 @@ mkdir -p "$(dirname "$WORKTREE_DIR")"
 
 echo "🔀 Adding git worktree..."
 cd "$PROJECT_ROOT"
-git worktree add "$WORKTREE_DIR" "$WORKTREE_NAME" 2>/dev/null || {
-    echo "⚠️  Branch '$WORKTREE_NAME' doesn't exist. Creating new branch..."
-    git worktree add -b "$WORKTREE_NAME" "$WORKTREE_DIR"
-}
+# Try to create worktree from existing branch first
+if ! git worktree add "$WORKTREE_DIR" "$WORKTREE_AND_BRANCH_NAME" 2>/dev/null; then
+    echo "⚠️  Branch '$WORKTREE_AND_BRANCH_NAME' doesn't exist. Creating new branch..."
+    git worktree add -b "$WORKTREE_AND_BRANCH_NAME" "$WORKTREE_DIR"
+fi
 
 echo "📋 Copying .env file..."
 if [ -f "$PROJECT_ROOT/apps/web/.env" ]; then
@@ -38,12 +40,12 @@ if [ -f "$PROJECT_ROOT/apps/web/.env" ]; then
     echo "✅ .env file copied successfully"
     
     echo "🔧 Updating APP_URL for worktree..."
-    sed -i '' "s|APP_URL=.*|APP_URL=http://local.$WORKTREE_NAME.govdo.com|" "$WORKTREE_DIR/apps/web/.env"
-    echo "✅ APP_URL updated to http://local.$WORKTREE_NAME.govdo.com"
+    sed -i '' "s|APP_URL=.*|APP_URL=http://local.$WORKTREE_AND_BRANCH_NAME.govdo.com|" "$WORKTREE_DIR/apps/web/.env"
+    echo "✅ APP_URL updated to http://local.$WORKTREE_AND_BRANCH_NAME.govdo.com"
     
     echo "🏷️ Adding VHOST_NAME to .env..."
-    echo "VHOST_NAME=$WORKTREE_NAME" >> "$WORKTREE_DIR/apps/web/.env"
-    echo "✅ VHOST_NAME=$WORKTREE_NAME added to .env"
+    echo "VHOST_NAME=$WORKTREE_AND_BRANCH_NAME" >> "$WORKTREE_DIR/apps/web/.env"
+    echo "✅ VHOST_NAME=$WORKTREE_AND_BRANCH_NAME added to .env"
 else
     echo "⚠️  Warning: .env file not found at $PROJECT_ROOT/apps/web/.env"
 fi
@@ -51,9 +53,9 @@ fi
 echo "📁 Changing to worktree directory..."
 cd "$WORKTREE_DIR"
 
-echo "🌐 Adding hosts entry for local.$WORKTREE_NAME.govdo.com..."
-HOSTS_ENTRY="127.0.0.1 local.$WORKTREE_NAME.govdo.com"
-if ! grep -q "local.$WORKTREE_NAME.govdo.com" /etc/hosts; then
+echo "🌐 Adding hosts entry for local.$WORKTREE_AND_BRANCH_NAME.govdo.com..."
+HOSTS_ENTRY="127.0.0.1 local.$WORKTREE_AND_BRANCH_NAME.govdo.com"
+if ! grep -q "local.$WORKTREE_AND_BRANCH_NAME.govdo.com" /etc/hosts; then
     echo "Adding: $HOSTS_ENTRY"
     echo "This requires sudo access to modify /etc/hosts..."
     echo "$HOSTS_ENTRY" | sudo tee -a /etc/hosts > /dev/null
@@ -88,7 +90,7 @@ echo "📍 Worktree location: $WORKTREE_DIR"
 echo "🌐 Development server PID: $DEV_SERVER_PID"
 echo ""
 echo "To stop the development server:"
-echo "  kill -9 $DEV_SERVER_PID"
+echo "  kill -9 $(pgrep -f \"$WORKTREE_AND_BRANCH_NAME.*vite\")"
 echo ""
 echo "To stop Docker containers:"
 echo "  cd $WORKTREE_DIR"

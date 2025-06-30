@@ -4,6 +4,7 @@
     "scripts": {
         "build": "tsc && vite build && vite build --ssr",
         "dev": "vite",
+        "worktree:dev": "vite --host=local.$(git branch --show-current).govdo.com",
         "lint": "eslint resources/js --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix"
     },
     "devDependencies": {
