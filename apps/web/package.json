@@ -7,6 +7,15 @@
         "worktree:dev": "vite --host=local.$(git branch --show-current).govdo.com",
         "lint": "eslint resources/js --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix"
     },
+    "dependencies": {
+        "@govdo/ui": "workspace:*",
+        "@radix-ui/react-slot": "^1.2.3",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "lucide-react": "^0.525.0",
+        "tailwind-merge": "^3.3.1",
+        "tailwindcss-animate": "^1.0.7"
+    },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
         "@inertiajs/react": "^2.0.0",
@@ -36,13 +45,5 @@
         "tailwindcss": "^3.2.1",
         "typescript": "^5.0.2",
         "vite": "^6.0.11"
-    },
-    "dependencies": {
-        "@radix-ui/react-slot": "^1.2.3",
-        "class-variance-authority": "^0.7.1",
-        "clsx": "^2.1.1",
-        "lucide-react": "^0.525.0",
-        "tailwind-merge": "^3.3.1",
-        "tailwindcss-animate": "^1.0.7"
     }
 }

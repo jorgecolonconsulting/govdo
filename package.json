@@ -1,8 +1,16 @@
 {
   "name": "govdo",
+  "private": true,
   "version": "0.1.0",
   "description": "Centralized public communications task management for government officials",
-  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "npm@10.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "directories": {
     "doc": "docs"
   },
@@ -12,6 +20,10 @@
     "worktree_docker_compose_file": ".devcontainer/docker-compose.worktree.yml"
   },
   "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "turbo test",
     "docker-up:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env up --remove-orphans app",
     "docker-up:db": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env up --remove-orphans db",
     "docker-down:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env down app",
@@ -25,6 +37,9 @@
     "worktree:docker-bash:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app bash",
     "worktree:docker-exec:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}",
     "worktree:run-dev:app": "cd apps/web && npm run worktree:dev"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
   },
   "repository": {
     "type": "git",

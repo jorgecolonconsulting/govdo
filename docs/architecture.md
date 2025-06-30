@@ -95,6 +95,15 @@ graph TD
 
 > **Removed:** `packages/auth` – authentication handled inside Laravel Breeze + Fortify.
 
+### UI Component Library Architecture
+
+The `packages/ui` component library follows clean architecture principles with proper TypeScript configuration:
+
+- **Architecture Document**: [UI Component Library Architecture](ui-component-library-architecture.md)
+- **Key Principle**: Web App → UI Package (never reverse dependency)
+- **Status**: Analysis complete, implementation pending
+- **Critical Issues**: Circular dependency violations identified and solutions provided
+
 ---
 
 ## REST API Spec (excerpt)
