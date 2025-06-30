@@ -1,0 +1,16 @@
+---
+description: When needing to run an artisan command or other CLI command in the docker container running the app
+globs: 
+alwaysApply: false
+---
+For the main app use the following example
+
+```bash
+npm run docker-bash:app -- -c "php artisan test tests/Feature/TaskModelTest.php"
+```
+
+If you are in a worktree use the following example
+
+```bash
+npm run worktree:docker-bash:app -- -c "php artisan test tests/Feature/TaskModelTest.php"
+```
