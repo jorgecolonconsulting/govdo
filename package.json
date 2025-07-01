@@ -34,12 +34,12 @@
     "docker-bash:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env exec app bash",
     "docker-exec:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}",
     "run-dev:app": "cd apps/web && npm run dev",
-    "worktree:docker-up:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env up --remove-orphans app",
-    "worktree:docker-down:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down app",
-    "worktree:docker-bash:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app bash",
-    "worktree:docker-exec:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}",
-    "worktree:docker-up:redis": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env up --remove-orphans redis",
-    "worktree:docker-down:redis": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down redis",
+    "worktree:docker-up:app": "docker compose --project-name $(basename `pwd`) -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env up --remove-orphans app",
+    "worktree:docker-down:app": "docker compose --project-name $(basename `pwd`) -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down app",
+    "worktree:docker-bash:app": "docker compose --project-name $(basename `pwd`) -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app bash",
+    "worktree:docker-exec:app": "docker compose --project-name $(basename `pwd`) -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}",
+    "worktree:docker-up:redis": "docker compose --project-name $(basename `pwd`) -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env up --remove-orphans redis",
+    "worktree:docker-down:redis": "docker compose --project-name $(basename `pwd`) -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down redis",
     "worktree:run-dev:app": "cd apps/web && npm run worktree:dev"
   },
   "devDependencies": {
