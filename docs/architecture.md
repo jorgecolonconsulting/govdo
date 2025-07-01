@@ -2,7 +2,7 @@
 
 ## Introduction
 
-GovDo is a **mobile‑first web application**.  It is delivered as a **Laravel 11 monolith with Inertia + React** inside a **Turborepo** monorepo, deployable to **Heroku**.  The goal of this document is to give developers (human or AI) an unambiguous blueprint for building and evolving GovDo while keeping future extraction into separate services straightforward.
+GovDo is a **mobile‑first web application**.  It is delivered as a **Laravel 11 monolith with Inertia + React** inside a **Turborepo** monorepo, deployable to **Heroku**.  The goal of this document is to give developers (human or AI) an unambiguous blueprint for building and evolving GovDo while keeping future extraction into separate services straightforward.
 
 > **Relationship to Front‑End Architecture**\
  Front‑end code lives inside the `apps/web` Laravel app and is composed of reusable React components in `packages/ui`.  This doc covers full‑stack concerns; UI‑specific interaction patterns are detailed in the UI/UX spec.
@@ -45,13 +45,13 @@ graph TD
 
 | Category          | Technology              | Version    | Purpose                                | Rationale                        |
 | ----------------- | ----------------------- | ---------- | -------------------------------------- | -------------------------------- |
-| **Language**      | PHP                     | 8.3        | Backend code                           | Latest LTS supporting Laravel 11 |
+| **Language**      | PHP                     | 8.3        | Backend code                           | Latest LTS supporting Laravel 11 |
 | **Runtime**       | heroku/php buildpack    | 8.3.22     | Deployed PHP container runtime         | Stable known PHP runtime         |
 | **Runtime**       | heroku/nodejs buildpack | 22         | Nodejs runtime Inertia SSR             | Stable known NodeJS runtime      |
 | **Framework**     | Laravel                 | 11.x       | Web & API                              | Breeze & Fortify compatibility   |
 | **Frontend**      | React                   | 19.x       | UI rendering via Inertia               | Ecosystem & hooks                |
 | **Styling**       | Tailwind CSS            | 3.x        | Utility‑first CSS                      | Mobile‑first & industry standard |
-| **Build Tool**    | Vite                    | 5.x        | Asset bundling                         | Default in Laravel 11            |
+| **Build Tool**    | Vite                    | 5.x        | Asset bundling                         | Default in Laravel 11            |
 | **Database**      | MariaDB                 | 10.11      | Persistence + auditing                 | Improvements over MySQL          |
 | **Cache/Session** | Redis                   | 7.x        | Cache & session store                  | Heroku Redis                     |
 | **Testing**       | PestPHP                 | default    | Snapshot, architecture, stress testing | Expressive syntax                |
@@ -157,7 +157,7 @@ components:
 
 ---
 
-## Source Tree (excerpt)
+## Source Tree (excerpt)
 
 ```plaintext
 monorepo/
@@ -198,14 +198,14 @@ monorepo/
 1. **Repositories** aggregate business logic & collections of Eloquent models; **calling methods on a single model instance is acceptable** for simple actions.
 2. **Reusable React components** live **exclusively** in `packages/ui`; app‑specific components remain inside `apps/web/resources/js/components`.
 3. Avoid facades inside services; use constructor DI for testability.
-4. Controllers must stay ≤ 150 LOC, delegate to services.
+4. Controllers must stay ≤ 150 LOC, delegate to services.
 5. All new code passes **Pest snapshot** & **architecture** tests.
 
 ---
 
 ## Infrastructure & Deployment
 
-- **Heroku**: 1 × Standard‑1 dyno, 1 × JawsDB MariaDB, 1 × Heroku Redis, 1 x Mailgun, 1 x Papertrail
+- **Heroku**: 1 × Standard‑1 dyno, 1 × JawsDB MariaDB, 1 × Heroku Redis, 1 x Mailgun, 1 x Papertrail
 - Heroku with `heroku/php` and `heroku/nodejs` buildpacks; release phase runs `php artisan migrate --force`; 
 - Environment vars: `APP_KEY`, `DB_*`, `REDIS_URL`, `REDIS_TLS_VERIFY`, `SESSION_SECURE_COOKIE=true`.
 - HSTS header set via TrustProxies middleware (`max‑age=31536000; preload`).
