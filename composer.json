@@ -1,5 +1,6 @@
 {
     "require": {
-        "laravel/installer": "5.11.2"
+        "laravel/installer": "5.11.2",
+        "ext-redis": "*"
     }
 }

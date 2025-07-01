@@ -1,5 +1,5 @@
 {
-  "name": "govdo",
+  "name": "@govdo",
   "private": true,
   "version": "0.1.0",
   "description": "Centralized public communications task management for government officials",
@@ -24,6 +24,7 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo test",
+    "heroku-prebuild": "cd apps/web && composer install && php artisan migrate --force && npm install",
     "docker-up:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env up --remove-orphans app",
     "docker-down:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env down app",
     "docker-up:db": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env up --remove-orphans db",

@@ -15,6 +15,3 @@ build:
   languages:
     - nodejs
     - php
-release:
-  command:
-    - cd apps/web && php artisan migrate --force
