@@ -17,4 +17,7 @@ build:
     - php
 release:
   command:
+    - cd apps/web && composer install
     - cd apps/web && php artisan migrate --force
+    - cd apps/web && npm install
+    - cd apps/web && npm run build
