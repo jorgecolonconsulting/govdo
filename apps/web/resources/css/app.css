@@ -4,31 +4,46 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    /* GovDo Brand Colors - Primary System */
+    --govdo-primary: 199 100% 37%;        /* #0087bd */
+    --govdo-secondary: 252 36% 58%;       /* #8071b7 */
+    --govdo-neutral-dark: 240 17% 15%;    /* #1f1f29 */
+    --govdo-neutral-light: 60 20% 96%;    /* #f5f5f3 */
+    --govdo-neutral-white: 180 100% 99%;  /* #faffff */
+
+    /* GovDo Extended Palette */
+    --govdo-blue-light: 197 52% 53%;      /* #40a5ce */
+    --govdo-blue-dark: 197 100% 31%;      /* #0073a0 */
+    --govdo-orange-light: 25 85% 68%;     /* #f29e6a */
+    --govdo-orange: 17 77% 58%;           /* #ee7e38 */
+    --govdo-orange-dark: 21 62% 49%;      /* #ca6b30 */
+    --govdo-purple-light: 251 28% 70%;    /* #a094c9 */
+    --govdo-purple-dark: 257 23% 50%;     /* #6d609c */
+    --govdo-pink-light: 346 62% 69%;      /* #e37b92 */
+    --govdo-pink: 344 62% 58%;            /* #d94f6d */
+    --govdo-pink-dark: 346 44% 48%;       /* #b8455d */
+
+    /* Map to shadcn/ui semantic tokens */
+    --background: var(--govdo-neutral-light);
+    --foreground: var(--govdo-neutral-dark);
+    --primary: var(--govdo-primary);
+    --primary-foreground: var(--govdo-neutral-white);
+    --secondary: var(--govdo-secondary);
+    --secondary-foreground: var(--govdo-neutral-white);
+    --accent: var(--govdo-blue-light);
+    --accent-foreground: var(--govdo-neutral-dark);
+    --destructive: var(--govdo-orange);
+    --destructive-foreground: var(--govdo-neutral-white);
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: var(--govdo-primary);
+    --muted: var(--govdo-neutral-light);
+    --muted-foreground: var(--govdo-neutral-dark);
+    --card: var(--govdo-neutral-white);
+    --card-foreground: var(--govdo-neutral-dark);
+    --popover: var(--govdo-neutral-white);
+    --popover-foreground: var(--govdo-neutral-dark);
+    --radius: 0.5rem;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -64,5 +79,11 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Averia Serif Libre', serif;
+    color: hsl(var(--govdo-primary));
   }
 }

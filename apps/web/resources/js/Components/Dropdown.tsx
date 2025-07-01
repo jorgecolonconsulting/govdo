@@ -3,6 +3,7 @@ import { InertiaLinkProps, Link } from '@inertiajs/react';
 import {
     createContext,
     Dispatch,
+    HTMLAttributes,
     PropsWithChildren,
     SetStateAction,
     useContext,
@@ -19,7 +20,7 @@ const DropDownContext = createContext<{
     toggleOpen: () => {},
 });
 
-const Dropdown = ({ children }: PropsWithChildren) => {
+const Dropdown = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
     const [open, setOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -28,7 +29,9 @@ const Dropdown = ({ children }: PropsWithChildren) => {
 
     return (
         <DropDownContext.Provider value={{ open, setOpen, toggleOpen }}>
-            <div className="relative">{children}</div>
+            <div className="relative" {...props}>
+                {children}
+            </div>
         </DropDownContext.Provider>
     );
 };

@@ -66,3 +66,4 @@ packages/ui/dist/SecondaryButton.js
 packages/ui/dist/SecondaryButton.mjs
 packages/ui/dist/TextInput.js
 packages/ui/dist/TextInput.mjs
+apps/web/_ide_helper.php

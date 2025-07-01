@@ -33,6 +33,7 @@
     "docker-down:redis": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env down redis",
     "docker-bash:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env exec app bash",
     "docker-exec:app": "docker compose -f ${npm_config_main_docker_compose_file:-$npm_package_config_main_docker_compose_file} --env-file apps/web/.env exec app ${npm_config_command:-$npm_package_config_command}",
+    "run-dev:app": "cd apps/web && npm run dev",
     "worktree:docker-up:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env up --remove-orphans app",
     "worktree:docker-down:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env down app",
     "worktree:docker-bash:app": "docker compose -f ${npm_config_worktree_docker_compose_file:-$npm_package_config_worktree_docker_compose_file} --env-file apps/web/.env exec app bash",
