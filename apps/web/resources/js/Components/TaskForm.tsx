@@ -86,7 +86,7 @@ function TaskPrimaryActions(props: {
 
 function TaskDueDate(props: {
     data: InertiaFormProps<TaskFormFields>['data'];
-    onChange: (e: React.ChangeEvent) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     errors: InertiaFormProps<TaskFormFields>['errors'];
 }) {
     return (
@@ -131,7 +131,7 @@ function TaskPriority(props: {
             <InputLabel htmlFor="priority" value="Priority" />
 
             <div className="mt-2 flex gap-4">
-                {['normal', 'resident', 'emergency'].map(
+                {(['normal', 'resident', 'emergency'] as const).map(
                     props.mapPriorityOptionsCallback,
                 )}
             </div>
@@ -282,7 +282,7 @@ export default function TaskForm({ task }: { task: Task | null }) {
                     {/* Due Date Field */}
                     <TaskDueDate
                         data={data}
-                        onChange={(e: React.ChangeEvent) =>
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setData('due_date', e.target.value)
                         }
                         errors={errors}
