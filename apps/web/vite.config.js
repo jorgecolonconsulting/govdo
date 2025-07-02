@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import laravel from 'laravel-vite-plugin';
 import path from 'path';
+import { defineConfig } from 'vite';
 
 function extractHostOrGetDefault() {
     const rawAppUrl = process.env.APP_URL || 'local.govdo.com';
@@ -25,13 +25,13 @@ export default defineConfig({
         allowedHosts: ['.govdo.com'],
         host: extractHostOrGetDefault(),
         cors: {
-            origin: [/http:\/\/local\..*\.govdo\.com:\d+/],
-        }
+            origin: [/^http:\/\/local\..*?govdo.com:?\d*/],
+        },
     },
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),
-            'ziggy': path.resolve(__dirname, 'vendor/tightenco/ziggy/dist'), // based on the tip here https://github.com/tighten/ziggy/issues/427#issuecomment-898823699
+            ziggy: path.resolve(__dirname, 'vendor/tightenco/ziggy/dist'), // based on the tip here https://github.com/tighten/ziggy/issues/427#issuecomment-898823699
         },
     },
 });

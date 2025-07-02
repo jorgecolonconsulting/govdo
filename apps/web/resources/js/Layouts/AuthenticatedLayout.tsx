@@ -1,14 +1,14 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import { usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
 
 export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    // const user = usePage().props.auth.user;
-    const user = { name: 'John Doe', email: 'test@test.com' };
+    const user = usePage().props.auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
@@ -93,10 +93,20 @@ export default function Authenticated({
                             </Dropdown.Trigger>
 
                             <Dropdown.Content>
-                                <Dropdown.Link href={route('profile.edit')}>
+                                <Dropdown.Link
+                                    className="hover:bg-govdo-neutral-light"
+                                    href={route('tasks.index')}
+                                >
+                                    Task Dashboard
+                                </Dropdown.Link>
+                                <Dropdown.Link
+                                    className="hover:bg-govdo-neutral-light"
+                                    href={route('profile.edit')}
+                                >
                                     Profile
                                 </Dropdown.Link>
                                 <Dropdown.Link
+                                    className="hover:bg-govdo-neutral-light"
                                     href={route('logout')}
                                     method="post"
                                     as="button"
@@ -115,10 +125,10 @@ export default function Authenticated({
                     >
                         <div className="space-y-1 pb-3 pt-2">
                             <ResponsiveNavLink
-                                href={route('dashboard')}
-                                active={route().current('dashboard')}
+                                href={route('tasks.index')}
+                                active={route().current('tasks.index')}
                             >
-                                Dashboard
+                                Task Dashboard
                             </ResponsiveNavLink>
                         </div>
 
@@ -149,7 +159,7 @@ export default function Authenticated({
                 </header>
             )}
 
-            <main className="mx-auto max-w-7xl px-4 py-4 sm:px-8 sm:py-8">
+            <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
                 {children}
             </main>
         </div>

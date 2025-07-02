@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 class Task extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -21,8 +23,12 @@ class Task extends Model
     ];
 
     protected $casts = [
-        'due_date' => 'date',
+        'due_date' => 'date:Y-m-d',
         'completed_at' => 'timestamp',
+    ];
+
+    protected $appends = [
+        'completed',
     ];
 
     /**
@@ -47,6 +53,14 @@ class Task extends Model
     public function scopeCompleted(Builder $query)
     {
         return $query->whereNotNull('completed_at');
+    }
+
+    /**
+     * Accessor: Check if task is completed
+     */
+    public function getCompletedAttribute(): bool
+    {
+        return !is_null($this->completed_at);
     }
 
     /**
