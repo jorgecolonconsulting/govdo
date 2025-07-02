@@ -24,6 +24,9 @@ export default defineConfig({
     server: {
         allowedHosts: ['.govdo.com'],
         host: extractHostOrGetDefault(),
+        cors: {
+            origin: [/http:\/\/local\..*\.govdo\.com:\d+/],
+        }
     },
     resolve: {
         alias: {
